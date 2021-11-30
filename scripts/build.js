@@ -1,35 +1,30 @@
 #!/usr/bin/env node
-const {build} = require('vite');
-const {dirname} = require('path');
+const {execSync} = require('child_process');
 
 /** @type 'production' | 'development' */
-const mode = process.env.MODE = process.env.MODE || 'production';
+process.env.MODE = process.env.MODE || 'production';
 
-const packagesConfigs = [
-  'packages/main/vite.config.js',
-  'packages/preload/vite.config.js',
-  'packages/renderer/vite.config.js',
+const packages = [
+  'packages/main',
+  'packages/preload',
+  'packages/renderer',
 ];
 
 
-/**
- * Run `vite build` for config file
- */
-const buildByConfig = (configFile) => build({configFile, mode});
 (async () => {
   try {
     const totalTimeLabel = 'Total bundling time';
     console.time(totalTimeLabel);
 
-    for (const packageConfigPath of packagesConfigs) {
+    for (const p of packages) {
 
-      const consoleGroupName = `${dirname(packageConfigPath)}/`;
+      const consoleGroupName = `${p}/`;
       console.group(consoleGroupName);
 
       const timeLabel = 'Bundling time';
       console.time(timeLabel);
 
-      await buildByConfig(packageConfigPath);
+      execSync('pnpm -C ' + p + ' build', {stdio: [0, 1, 2]});
 
       console.timeEnd(timeLabel);
       console.groupEnd();

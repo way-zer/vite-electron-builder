@@ -1,0 +1,12 @@
+{
+  "name": "main",
+  "private": true,
+  "main": "dist/index.cjs",
+  "scripts": {
+    "build": "vite build",
+    "dev": "node scripts/watch.js"
+  },
+  "dependencies": {
+    "electron-updater": "4.6.4"
+  }
+}
