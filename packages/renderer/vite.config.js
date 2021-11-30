@@ -25,6 +25,7 @@ const config = {
     fs: {
       strict: true,
     },
+    port: process.env.PORT || 3001,
   },
   build: {
     sourcemap: true,

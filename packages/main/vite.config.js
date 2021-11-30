@@ -12,7 +12,6 @@ const PACKAGE_ROOT = __dirname;
 const config = {
   mode: process.env.MODE,
   root: PACKAGE_ROOT,
-  envDir: process.cwd(),
   resolve: {
     alias: {
       '/@/': join(PACKAGE_ROOT, 'src') + '/',
